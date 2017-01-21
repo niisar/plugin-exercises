@@ -100,6 +100,7 @@ require(["gitbook"], function(gitbook) {
     // Add code editor, bind interractions
     var prepareExercise = function($exercise) {
         var codeSolution = $exercise.find(".code-solution").text();
+        console.log(codeSolution);
         var codeValidation = $exercise.find(".code-validation").text();
         var codeContext = $exercise.find(".code-context").text();
 
