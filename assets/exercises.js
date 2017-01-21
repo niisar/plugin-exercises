@@ -3,7 +3,7 @@ require(["gitbook"], function(gitbook) {
     var LANGUAGES = {
         "javascript": {
             id: "javascript",
-            assertCode: "function assert(condition, message) { \nif (!condition) { \n throw message || \"Assertion failed\"; \n } \n }\n",
+            assertCode: "function assert(condition, message) { \nif (!condition) { \n throw message || \"Wrong answer! Please try again\"; \n } \n }\n",
             REPL: JSREPL,
             sep: ";\n",
         }
