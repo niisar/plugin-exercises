@@ -100,9 +100,17 @@ require(["gitbook"], function(gitbook) {
     // Add code editor, bind interractions
     var prepareExercise = function($exercise) {
         var codeSolution = $exercise.find(".code-solution").text();
-        console.log(codeSolution);
+        
+        var lines = codeSolutionLower.split('\n');
+        var lineConcat = "";
+        for (step = 0; step < lines.length; step++) {
+            lineConcat += "var line"+step+" =\""+ lines[step].replace(/'/g,'').replace(/ /g, '')+"\";"
+        }
+        console.log(lineConcat);
+        
         var codeValidation = $exercise.find(".code-validation").text();
         var codeContext = $exercise.find(".code-context").text();
+        codeContext = codeContext +" "+ lineConcat;
 
         var editor = ace.edit($exercise.find(".editor").get(0));
         editor.setTheme("ace/theme/tomorrow");
