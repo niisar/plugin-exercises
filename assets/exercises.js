@@ -99,21 +99,21 @@ require(["gitbook"], function(gitbook) {
     // Bind an exercise
     // Add code editor, bind interractions
     var prepareExercise = function($exercise) {
-        var codeSolution = $exercise.find(".code-solution").text();
-        
-        codeSolutionLower = codeSolution.toLowerCase();
+        var editor = ace.edit($exercise.find(".editor").get(0)); 
+        var codeSolutionLower = editor.getValue().toLowerCase();
         var lines = codeSolutionLower.split('\n');
         var lineConcat = "";
         for (step = 0; step < lines.length; step++) {
-            lineConcat += "var line"+step+" =\""+ lines[step].replace(/'/g,'').replace(/ /g, '')+"\";"
+                lineConcat += "var line"+step+" =\""+ lines[step].replace(/'/g,'').replace(/ /g, '')+"\";"
         }
         console.log(lineConcat);
         
+        var codeSolution = $exercise.find(".code-solution").text();
         var codeValidation = $exercise.find(".code-validation").text();
         var codeContext = $exercise.find(".code-context").text();
         codeContext = codeContext +" "+ lineConcat;
-        codeSolution = lineConcat;
-        var editor = ace.edit($exercise.find(".editor").get(0));
+        //codeSolution = lineConcat;
+       
         editor.setTheme("ace/theme/tomorrow");
         editor.getSession().setUseWorker(false);
         editor.getSession().setMode("ace/mode/javascript");
@@ -132,7 +132,18 @@ require(["gitbook"], function(gitbook) {
 
             gitbook.events.trigger("exercise.submit", {type: "code"});
 
-            execute("javascript", editor.getValue(), codeValidation, codeContext, function(err, result) {
+            //nisar
+            var codeSolutionLower = editor.getValue().toLowerCase();
+            var lines = codeSolutionLower.split('\n');
+            var lineConcat = "";
+            for (step = 0; step < lines.length; step++) {
+                lineConcat += "var line"+step+" =\""+ lines[step].replace(/'/g,'').replace(/ /g, '')+"\";"
+            }
+            console.log(lineConcat);
+        
+            
+            
+            execute("javascript", lineConcat, codeValidation, codeContext, function(err, result) {
                 $exercise.toggleClass("return-error", err != null);
                 $exercise.toggleClass("return-success", err == null);
                 if (err) $exercise.find(".alert-danger").text(err.message || err);
