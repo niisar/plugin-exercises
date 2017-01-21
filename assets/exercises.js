@@ -101,6 +101,7 @@ require(["gitbook"], function(gitbook) {
     var prepareExercise = function($exercise) {
         var codeSolution = $exercise.find(".code-solution").text();
         
+        codeSolutionLower = codeSolution.toLowerCase();
         var lines = codeSolutionLower.split('\n');
         var lineConcat = "";
         for (step = 0; step < lines.length; step++) {
