@@ -112,7 +112,7 @@ require(["gitbook"], function(gitbook) {
         var codeValidation = $exercise.find(".code-validation").text();
         var codeContext = $exercise.find(".code-context").text();
         codeContext = codeContext +" "+ lineConcat;
-
+        codeSolution = lineConcat;
         var editor = ace.edit($exercise.find(".editor").get(0));
         editor.setTheme("ace/theme/tomorrow");
         editor.getSession().setUseWorker(false);
